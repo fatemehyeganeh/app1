@@ -12,7 +12,7 @@
 
         //running error handler and user signup
 
-            $login->checkUser();
+            $login->loginUser();
            
         //going back to front page
             header('no error!');
