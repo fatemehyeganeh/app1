@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="includes/login.inc.php" method="post">
+    <form action="../private/includes/login.inc.php" method="post">
         Name: <input type="text" name="uid"><br>
         PassWord: <input type="text" name="pwd"><br>       
     <input type="submit">
