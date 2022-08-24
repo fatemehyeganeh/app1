@@ -1,41 +1,21 @@
 <?php
 class Login extends Dbh{
-    protected function setUser($uid,$pwd,$email){
+    protected function getUser($uid,$pwd){
         $statement=$this->connect()->
             prepare(
-                'INSERT INTO users (username,pwd,email) VALUES (?,?,?);'
+                'SELECT username FROM users WHERE username=? AND pwd=?;'
                 );
 
-        $hashedPwd=password_hash($pwd,PASSWORD_DEFAULT);
-
-        if(!$statement->execute(array($uid,$hashedPwd,$email))){
+        if(!$statement->execute(array($uid,$Pwd))){
             $statement=null;
-            header('location:../index.php?error=Insertstatementfailed');
+            header('location:../index.php?error=selectstatementfailed');
             exit();
         }
-        
-        $statement=null;
-    }
-
-    protected function checkUser($uid,$email){
-        $statement=$this->connect()->
-            prepare(
-                'SELECT username FROM users WHERE username=? OR email=?;'
-                );
-    
-       if(!$statement->execute(array($uid,$email))){
-        $statement=null;
-        header('location:../index.php?error=statementfailed');
-        exit();
-       }
-
-       $resultCheck;
-       if($statement->rowCount()>0)
-        {$resultCheck=false;}
-        else{
-            $resultCheck=true;
+        if($statement->rowCount()==0){
+            $statement=null;
+            header('location:../index.php?error=usernotfounded');
+            exit();
         }
-        return $resultCheck;
+        $statement=null;
     }
-
 }
