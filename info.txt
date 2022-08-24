@@ -1,0 +1,7 @@
+users
+    $uid $pwd $pwdrepead $email
+
+
+bicycles
+  id	brand	model	year	category	gender	color	price	weight_kg	condition_id	description	
+
